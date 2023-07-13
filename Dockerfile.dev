@@ -1,0 +1,11 @@
+# Set the base image
+FROM node:latest
+
+# Set the working directory in the container
+WORKDIR /app
+
+RUN corepack enable
+RUN corepack prepare yarn@stable --activate
+RUN yarn set version stable
+
+CMD ["yarn", "dev"]
