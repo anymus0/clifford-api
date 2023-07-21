@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { createGameInstance } from "./../controllers/createGameInstance";
-import { getGameInstances } from "../controllers/getGameInstances";
-import { getGameInstanceById } from "../controllers/getGameInstanceById";
+import { createGameInstance } from "./../controllers/createGameInstanceController";
+import { getGameInstances } from "../controllers/getGameInstancesController";
+import { getGameInstanceById } from "../controllers/getGameInstanceByIdController";
 
 // create express router
 const router = Router();

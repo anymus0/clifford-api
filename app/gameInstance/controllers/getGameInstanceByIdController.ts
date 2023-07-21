@@ -1,7 +1,6 @@
 // body: gameId
 import { Request, Response } from "express";
-import { GameInstance } from "./../models/GameInstance";
-import { AppDataSource } from "./../../global/data-source";
+import * as GameInstanceService from "./../GameInstanceService";
 
 export const getGameInstanceById = async (req: Request, res: Response) => {
   try {
@@ -10,9 +9,8 @@ export const getGameInstanceById = async (req: Request, res: Response) => {
     if (!gameId) {
       throw "Request body is missing!";
     }
-    // get gameInstance by gameId from DB
-    const gameInstanceRepository = AppDataSource.getRepository(GameInstance);
-    const gameInstance = await gameInstanceRepository.findOneBy({ id: gameId });
+    // call service
+    const gameInstance = await GameInstanceService.getGameInstanceById(gameId);
     // send response
     res.status(200).json({
       isSuccess: true,

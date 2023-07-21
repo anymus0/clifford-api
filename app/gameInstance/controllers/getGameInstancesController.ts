@@ -1,12 +1,10 @@
 import { Request, Response } from "express";
-import { GameInstance } from "../models/GameInstance";
-import { AppDataSource } from "../../global/data-source";
+import * as GameInstanceService from "./../GameInstanceService";
 
 export const getGameInstances = async (req: Request, res: Response) => {
   try {
-    // get all gameInstance from DB
-    const gameInstanceRepository = AppDataSource.getRepository(GameInstance);
-    const gameInstances = await gameInstanceRepository.find();
+    // call service
+    const gameInstances = await GameInstanceService.getGameInstances();
     // send response
     res.status(200).json({
       isSuccess: true,

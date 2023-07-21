@@ -1,7 +1,6 @@
 // body: title, description
 import { Request, Response } from "express";
-import { GameInstance } from "./../models/GameInstance";
-import { AppDataSource } from "./../../global/data-source";
+import * as GameInstanceService from "./../GameInstanceService";
 
 export const createGameInstance = async (req: Request, res: Response) => {
   try {
@@ -11,13 +10,11 @@ export const createGameInstance = async (req: Request, res: Response) => {
     if (!title || !description) {
       throw "Request body is missing!";
     }
-    // create gameInsatnce obj
-    const newGameInstance = new GameInstance();
-    newGameInstance.title = title;
-    newGameInstance.description = description;
-    // save gameInsatnce to DB
-    const gameInstanceRepository = AppDataSource.getRepository(GameInstance);
-    await gameInstanceRepository.save(newGameInstance);
+    // call service
+    const newGameInstance = await GameInstanceService.createGameInstance(
+      title,
+      description
+    );
     // send response
     res.status(200).json({
       isSuccess: true,
