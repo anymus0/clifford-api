@@ -1,8 +1,44 @@
 services:
+  db:
+    image: mariadb:latest
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MARIADB_DATABASE: ${DB_NAME}
+      MARIADB_USER: ${DB_USERNAME}
+      MARIADB_PASSWORD: ${DB_USERPASSWORD}
+      MARIADB_AUTO_UPGRADE: "yes"
+      MARIADB_MYSQL_LOCALHOST_USER: "yes"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - app_net
+  phpmyadmin:
+    image: phpmyadmin:latest
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
+    networks:
+      - app_net
+    depends_on:
+      - db
   app:
     image: anymus/node-dev:latest
+    restart: always
     volumes:
       - .:/app
     working_dir: /app
     ports:
       - "3000:3000"
+    networks:
+      - app_net
+    depends_on:
+      - db
+
+networks:
+  app_net:
+
+volumes:
+  db_data:
