@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { createMessage } from "../controllers/createMessage";
-import { getMessages } from "../controllers/getMessages";
-import { getMessagesByGameInstance } from "../controllers/getMessagesByGameInstance";
+import { createMessage } from "../controllers/createMessageController";
+import { getMessages } from "../controllers/getMessagesController";
+import { getMessagesByGameInstance } from "../controllers/getMessagesByGameInstanceController";
 
 
 // create express router
