@@ -8,13 +8,13 @@ export const getGameInstances = async (req: Request, res: Response) => {
     // send response
     res.status(200).json({
       isSuccess: true,
-      gameInstances: gameInstances
+      gameInstances: gameInstances,
     });
   } catch (error) {
     res.status(500).json({
       isSuccess: false,
       gameInstances: null,
-      error: error
-    })
+      error: error,
+    });
   }
 };
