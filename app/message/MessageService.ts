@@ -19,4 +19,34 @@ export const createMessage = async (content: string, gameId: number) => {
     console.error(error);
     throw new Error("Error in 'MessageService.createMessage'");
   }
-}
+};
+
+export const getMessagesByGameInstance = async (gameId: number) => {
+  try {
+    // get gameInstance by gameId
+    const gameInstanceRepository = AppDataSource.getRepository(GameInstance);
+    const gameInstance = await gameInstanceRepository.findOneBy({ id: gameId });
+    // get messages
+    const messageRepository = AppDataSource.getRepository(Message);
+    const messages = await messageRepository.find({
+      where: { gameInstance: gameInstance },
+      order: { timestamp: "ASC" },
+    });
+    return messages;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Error in 'MessageService.getMessagesByGameInstance'");
+  }
+};
+
+export const getMessages = async () => {
+  try {
+    // get messages
+    const messageRepository = AppDataSource.getRepository(Message);
+    const messages = await messageRepository.find();
+    return messages;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Error in 'MessageService.getMessages'");
+  }
+};
