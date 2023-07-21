@@ -8,6 +8,7 @@ import compression from "compression";
 import defaultRoutes from "./global/routes/defaultRoutes";
 import communicateRoutes from "./communicate/routes/communicateRoutes";
 import gameInstanceRoutes from "./gameInstance/routes/gameInstanceRoutes";
+import messageRoutes from "./message/routes/messageRoutes";
 import { AppDataSource } from "./global/data-source";
 
 // define server port
@@ -24,7 +25,9 @@ app.use(compression({ level: 9 }));
 AppDataSource.initialize()
   .then(() => {
     // routes
-    app.use("/gameInstance", gameInstanceRoutes)
+    app.use("/communicate", communicateRoutes);
+    app.use("/gameInstance", gameInstanceRoutes);
+    app.use("/message", messageRoutes);
     app.use("/", defaultRoutes);
 
     // start server
