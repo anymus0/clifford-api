@@ -8,7 +8,7 @@ import {
 import * as MessageService from "./../message/MessageService";
 
 export const createChatCompletions = async (
-  gameId: number,
+  gameId: string,
   role: ChatCompletionRequestMessageRoleEnum,
   content: string
 ) => {

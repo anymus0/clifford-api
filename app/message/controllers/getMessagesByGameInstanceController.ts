@@ -7,7 +7,7 @@ export const getMessagesByGameInstance = async (
 ) => {
   try {
     // process req.body
-    const gameId: number = req.body.gameId;
+    const gameId: string = req.body.gameId;
     if (!gameId) {
       throw "Request body is missing!";
     }

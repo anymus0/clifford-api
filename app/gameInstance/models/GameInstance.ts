@@ -5,7 +5,7 @@ import { Message } from "../../message/models/Message";
 @Entity()
 export class GameInstance {
   @PrimaryGeneratedColumn("uuid")
-  id: number;
+  id: string;
   @Column()
   title: string;
   @Column()

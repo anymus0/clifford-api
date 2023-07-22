@@ -5,7 +5,7 @@ import * as MessageService from "./../MessageService";
 export const createMessage = async (req: Request, res: Response) => {
   try {
     // process req.body
-    const gameId: number = req.body.gameId;
+    const gameId: string = req.body.gameId;
     const role: ChatCompletionRequestMessageRoleEnum = req.body.role;
     const content: string = req.body.content;
     if (!gameId || !role || !content) {

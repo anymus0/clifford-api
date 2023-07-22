@@ -19,7 +19,7 @@ export const createGameInstance = async (
   }
 };
 
-export const getGameInstanceById = async (gameId: number) => {
+export const getGameInstanceById = async (gameId: string) => {
   try {
     // get gameInstance by gameId from DB
     const gameInstanceRepository = AppDataSource.getRepository(GameInstance);
