@@ -1,31 +1,30 @@
 import { Request, Response } from "express";
 import { ChatCompletionRequestMessageRoleEnum } from "openai";
-import * as MessageService from "./../MessageService";
+import * as CommunicateService from "./../CommunicateService";
 
-export const createMessage = async (req: Request, res: Response) => {
+export const createChatCompletion = async (req: Request, res: Response) => {
   try {
     // process req.body
     const gameId: number = req.body.gameId;
     const role: ChatCompletionRequestMessageRoleEnum = req.body.role;
     const content: string = req.body.content;
     if (!gameId || !role || !content) {
-      throw "Request body is missing!";
+      throw "Missing request body!";
     }
     // call service
-    const newMessage = await MessageService.createMessage(
+    const chatCompletionRes = await CommunicateService.createChatCompletions(
       gameId,
       role,
       content
     );
-    // send response
     res.status(200).json({
       isSuccess: true,
-      message: newMessage,
+      chatCompletionRes: chatCompletionRes,
     });
   } catch (error) {
     res.status(500).json({
       isSuccess: false,
-      message: null,
+      chatCompletionRes: null,
       error: error,
     });
   }

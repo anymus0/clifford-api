@@ -1,14 +1,20 @@
+import { ChatCompletionRequestMessageRoleEnum } from "openai";
 import { GameInstance } from "../gameInstance/models/GameInstance";
 import { AppDataSource } from "./../global/data-source";
 import { Message } from "./models/Message";
 
-export const createMessage = async (content: string, gameId: number) => {
+export const createMessage = async (
+  gameId: number,
+  role: ChatCompletionRequestMessageRoleEnum,
+  content: string
+) => {
   try {
     // get gameInstance by gameId
     const gameInstanceRepository = AppDataSource.getRepository(GameInstance);
     const gameInstance = await gameInstanceRepository.findOneBy({ id: gameId });
     // create new Message
     const newMessage = new Message();
+    newMessage.role = role;
     newMessage.content = content;
     newMessage.timestamp = new Date();
     newMessage.gameInstance = gameInstance;
