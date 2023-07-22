@@ -25,7 +25,7 @@ services:
     depends_on:
       - db
   app:
-    image: node-dev:alpine
+    image: anymus/node-dev:alpine
     restart: always
     volumes:
       - .:/app
